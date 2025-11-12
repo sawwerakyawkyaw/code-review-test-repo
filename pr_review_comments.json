@@ -1,0 +1,131 @@
+[
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "## Pull Request Overview\n\nThis PR introduces a `twoSumBruteForce` function that solves the classic two-sum problem using a nested loop approach. The implementation is correct and well-documented with clear JSDoc comments and comprehensive example usage.\n\n**Strengths:**\n- Clear documentation with proper JSDoc format\n- Correct algorithm implementation that avoids reusing the same element\n- Good test cases covering positive and negative scenarios\n- Detailed inline comments explaining the logic\n\n**Areas for Improvement:**\n- Missing input validation for edge cases (null/undefined arrays, empty arrays)\n- No module export statement for potential reuse\n- O(N²) time complexity could be optimized to O(N) with a hash map approach for larger datasets\n- Example usage code should be separated from the main function for better modularity\n\nOverall, this is a solid implementation for educational purposes, though it could benefit from additional edge case handling and export capabilities for production use.",
+        "commentType": 1
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "**Missing Input Validation**\n\nThe function should validate inputs before processing to prevent runtime errors. Consider adding checks for:\n- Null or undefined `nums` parameter\n- Empty array (length < 2)\n- Non-array inputs\n- Non-numeric target\n\nExample:\n```javascript\nif (!nums || !Array.isArray(nums) || nums.length < 2) {\n  return null;\n}\nif (typeof target !== 'number') {\n  return null;\n}\n```\n\nThis will make the function more robust and prevent potential crashes in production environments.",
+        "commentType": 1
+      }
+    ],
+    "threadContext": {
+      "filePath": "/twoSumBruteForce.js",
+      "rightFileStart": {
+        "line": 11,
+        "offset": 1
+      },
+      "rightFileEnd": {
+        "line": 11,
+        "offset": 1
+      }
+    }
+  },
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "**Performance Consideration: O(N²) Time Complexity**\n\nWhile this brute-force approach is correct and well-commented, it's worth noting in the documentation that this has O(N²) time complexity, which becomes inefficient for large arrays.\n\nFor arrays with thousands of elements, consider mentioning an optimized O(N) hash map solution as an alternative:\n```javascript\nfunction twoSumOptimized(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const complement = target - nums[i];\n    if (map.has(complement)) {\n      return [map.get(complement), i];\n    }\n    map.set(nums[i], i);\n  }\n  return null;\n}\n```\n\nThis would be valuable information for developers choosing between implementations based on their data size.",
+        "commentType": 1
+      }
+    ],
+    "threadContext": {
+      "filePath": "/twoSumBruteForce.js",
+      "rightFileStart": {
+        "line": 4,
+        "offset": 1
+      },
+      "rightFileEnd": {
+        "line": 4,
+        "offset": 1
+      }
+    }
+  },
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "**Excellent Loop Logic**\n\nGreat job using `i + 1` as the starting point for the inner loop! This correctly ensures:\n1. We don't compare an element with itself (i ≠ j constraint)\n2. We avoid duplicate pair checks (e.g., checking both [0,1] and [1,0])\n3. Better performance by reducing redundant comparisons\n\nThis is a best practice for the brute-force approach to the two-sum problem.",
+        "commentType": 1
+      }
+    ],
+    "threadContext": {
+      "filePath": "/twoSumBruteForce.js",
+      "rightFileStart": {
+        "line": 16,
+        "offset": 1
+      },
+      "rightFileEnd": {
+        "line": 16,
+        "offset": 1
+      }
+    }
+  },
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "**Missing Module Export**\n\nIf this function is intended to be imported and reused in other modules, you should add an export statement. Consider adding one of the following:\n\n**CommonJS:**\n```javascript\nmodule.exports = twoSumBruteForce;\n```\n\n**ES6:**\n```javascript\nexport { twoSumBruteForce };\n// or\nexport default twoSumBruteForce;\n```\n\nWithout an export, this function can only be used in the same file, limiting its reusability. If this is intentionally a standalone script, consider moving the example usage to a separate test file.",
+        "commentType": 1
+      }
+    ],
+    "threadContext": {
+      "filePath": "/twoSumBruteForce.js",
+      "rightFileStart": {
+        "line": 27,
+        "offset": 1
+      },
+      "rightFileEnd": {
+        "line": 27,
+        "offset": 1
+      }
+    }
+  },
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "**Consider Separating Example Usage**\n\nThe example usage code (lines 29-58) is helpful for demonstration but should ideally be separated from the main function definition for better code organization. Consider:\n\n1. Moving examples to a separate test file (e.g., `twoSumBruteForce.test.js`)\n2. Using a proper testing framework like Jest or Mocha\n3. Or wrapping in an IIFE or conditional check:\n\n```javascript\nif (require.main === module) {\n  // Example usage here\n}\n```\n\nThis separation improves:\n- Code maintainability\n- Module reusability\n- Professional structure for production codebases",
+        "commentType": 1
+      }
+    ],
+    "threadContext": {
+      "filePath": "/twoSumBruteForce.js",
+      "rightFileStart": {
+        "line": 29,
+        "offset": 1
+      },
+      "rightFileEnd": {
+        "line": 58,
+        "offset": 1
+      }
+    }
+  },
+  {
+    "comments": [
+      {
+        "parentCommentId": 0,
+        "content": "**Edge Case: Duplicate Values**\n\nWhile the current implementation correctly handles arrays with duplicate values (e.g., `[3, 3]` with target `6`), it might be worth adding a test case to demonstrate this behavior explicitly:\n\n```javascript\nconst numbers4 = [3, 3];\nconst target4 = 6;\n// Expected result: [0, 1] because nums[0] + nums[1] = 3 + 3 = 6\n```\n\nThis would make it clear to future readers that the function handles duplicates correctly.",
+        "commentType": 1
+      }
+    ],
+    "threadContext": {
+      "filePath": "/twoSumBruteForce.js",
+      "rightFileStart": {
+        "line": 41,
+        "offset": 1
+      },
+      "rightFileEnd": {
+        "line": 44,
+        "offset": 1
+      }
+    }
+  }
+]
